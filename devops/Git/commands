@@ -1,1 +1,47 @@
+which git
 
+apt-get install git -y
+
+yum install git -y
+
+git init
+
+git remote add origin "repo_url"
+
+git clone url
+
+git add .
+
+git commit -m "commit_message"
+
+git push origin branch_name
+
+git pull origin branch_name
+
+git status
+
+git config --global user.name "name"
+
+git config --global user.email "email"
+
+git config --list
+
+git config --global --list
+
+git config --global --edit
+
+git log
+
+git show commit_id
+
+git log --oneline
+
+git branch branch_name
+
+git checkout branch_name
+
+git branch
+
+git branch -a
+
+git reset --soft HEAD^
