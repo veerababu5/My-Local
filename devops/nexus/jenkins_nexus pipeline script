@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    environment {
+        PATH = "$PATH:/opt/maven/bin"
+    }
+    stages{
+       stage('GetCode'){
+            steps{
+                git 'https://github.com/pavanmarisetti/MOONPAGE-PROJECT.git'
+            }
+         }        
+       stage('Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+         }
+       stage ('artifacts') {
+            steps{
+                nexusArtifactUploader artifacts: [[artifactId: 'javademoproject', classifier: '', file: 'target/MoonPageWebApp.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'JavaProject', nexusUrl: '3.108.58.196:8081/repository/timetracker/', nexusVersion: 'nexus3', protocol: 'http', repository: 'timetracker', version: '1.0.0'
+            }
+        }	
+    }
+ }   
