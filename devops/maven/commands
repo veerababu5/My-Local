@@ -1,0 +1,25 @@
+sudo su -
+
+apt-get update -y
+
+yum update -y
+
+apt-get install openjdk-8-jdk-headless
+
+vi .bashrc
+
+wget
+
+tar -xvzf file_name
+
+mvn --version
+
+mvn verify
+
+mvn compile
+
+mvn test
+
+mvn package
+
+mvn clean         remove the target folder
