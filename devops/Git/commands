@@ -44,4 +44,24 @@ git branch
 
 git branch -a
 
+git tags
+
+git reset
+
+git revert
+
 git reset --soft HEAD^
+
+git merge branch_name
+
+git stash
+
+git stash list
+
+git stash clear
+
+git clean -n              detecting untracked files
+
+git clean -f              deleted untracked files
+
+
