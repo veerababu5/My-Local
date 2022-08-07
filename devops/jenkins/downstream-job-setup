@@ -1,0 +1,40 @@
+=======Requirement================
+
+>> When Job A trigger needs to Trigger Job B as a down stream job, and needs to Set Conditions like.
+
+While Triggering A Job User input needs to Provide Yes or No to trigger B Job. [ current service requires Release Tag then select Yes or else No ]
+
+Step 1: Need to set Active Choice Parameter in A Job Configuration.
+Name : Releasetag
+Script:
+  Groovy Script:
+      return[
+      'Yes'
+      'No'
+      ]
+Fallback Script
+  Groovy Script
+      return['error']
+      
+Choice Type : Select what ever you want Check Box or single select or Multi select.
+
+      
+      Once we have configurued Active Choice parameters in Job Configuration Next Need to add stage in Pipeline.
+      
+ Step 2: Add Stage in A Job Pipeline Script.
+ 
+ stage('post-build'){
+     if ( "${Releasetag}" == "Yes" )
+     {
+         echo 'Running Release Automation pipeline'
+           build job: 'release-automation-poc', parameters: [string(name: 'ProjectName', value: "${ProjectName}")]
+      }
+      else if ( "${Releasetag}" == "No" )
+      {
+           echo 'Release Tag Not Selected for this Service'
+       }
+       
+  }
+  
+  
+  This how we can trigger Down stream Job along with conditions.
