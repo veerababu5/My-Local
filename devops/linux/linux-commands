@@ -1,3 +1,21 @@
+sudo su -
+
+sudo -i
+
+sudo apt-get update -y
+
+sudo yum update -y
+
+sudo apt-get install default-jdk -y
+
+sudo yum install java-1.8* -y
+
+java -version
+
+vi .bash_profile
+JAVA_HOME=
+
+
 ls                                                  =>
 
 ls -l                                               =>
@@ -7,4 +25,22 @@ ls -la                                              =>
 cd                                                  =>
 
 cd ~                                                =>
+
+mkdir 
+
+touch
+
+vi
+
+useradd name
+
+passwd name
+
+visudo
+
+su name
+
+cat /etc/os-release
+
+cat /etc/passwd
 
