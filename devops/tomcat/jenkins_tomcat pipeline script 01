@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    environment {
+        PATH = "$PATH:/opt/apache-maven-3.8.6/bin"
+    }
+    stages{
+       stage('GetCode'){
+            steps{
+                git 'https://github.com/pavanmarisetti/MOONPAGE-PROJECT.git'
+            }
+         }        
+       stage('Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+         }
+         stage('deploy to tomcat'){
+             steps{
+                 deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://3.110.195.236:8081/')], contextPath: null, war: 'target/MoonPageWebApp.war'
+             }
+         }
+    }
+}
