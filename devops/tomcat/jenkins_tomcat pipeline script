@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    environment {
+        PATH = "$PATH:/opt/apache-maven-3.8.6/bin"
+    }
+    stages{
+       stage('GetCode'){
+            steps{
+                git 'https://github.com/veerababu5/SaiJavaCode.git'
+            }
+         }        
+       stage('Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+         }
+        stage ('dev deploy') {
+            steps{
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://13.127.223.141:8081/')], contextPath: null, war: 'webapp/target/webapp.war'
+            }
+        }
+    }
+}
