@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                git branch: 'develop', credentialsId: 'Jenkins-SSH', url: 'git@gitlab.com:WalkIn/veeru-promotions.git'
+            }
+        }
+        stage('Checking Files'){
+            steps {
+                sh 'ls -la'
+            }
+        }
+        stage('SonarQube analysis') {
+            environment {
+             scannerHome = tool 'SonarQubeScanner'
+            }
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh "${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=veeru-promotions \
+                        -Dsonar.projectName=veeru-promotions"
+                // sh "npm i sonar-scanner --save-dev"
+                // sh "npm install sonar-scanner"
+                // sh "npm run sonar-scanner -Dsonar.projectKey=veeru-promotions -Dsonar.projectName=veeru-promotions "
+                    }
+                }
+            }
+        }
+    }
