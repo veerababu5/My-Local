@@ -1,0 +1,141 @@
+ubuntu@ip-10-10-0-119:~$ sudo su -
+
+root@ip-10-10-0-119:~# apt-get update
+
+install the java first the command is choose any one my choice is 3rd one
+
+sudo apt install default-jdk
+sudo apt install openjdk-11-jdk-headless
+sudo apt install openjdk-8-jdk-headless
+
+root@ip-10-10-0-119:~# wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
+
+root@ip-10-10-0-119:~# ls -l
+
+-rw-r--r-- 1 root root 11576317 Sep 28 13:59 apache-tomcat-9.0.54.tar.gz
+drwxr-xr-x 3 root root     4096 Nov  8 08:47 snap
+
+root@ip-10-10-0-119:~# tar -xvzf apache-tomcat-9.0.54.tar.gz
+
+root@ip-10-10-0-119:~# ls -l
+
+drwxr-xr-x 9 root root     4096 Nov  9 07:11 apache-tomcat-9.0.54
+-rw-r--r-- 1 root root 11576317 Sep 28 13:59 apache-tomcat-9.0.54.tar.gz
+drwxr-xr-x 3 root root     4096 Nov  8 08:47 snap
+
+root@ip-10-10-0-119:~# cd apache-tomcat-9.0.54
+root@ip-10-10-0-119:~/apache-tomcat-9.0.54# ls -l
+total 148
+-rw-r----- 1 root root 18970 Sep 28 13:51 BUILDING.txt
+-rw-r----- 1 root root  6210 Sep 28 13:51 CONTRIBUTING.md
+-rw-r----- 1 root root 57092 Sep 28 13:51 LICENSE
+-rw-r----- 1 root root  2333 Sep 28 13:51 NOTICE
+-rw-r----- 1 root root  3372 Sep 28 13:51 README.md
+-rw-r----- 1 root root  6898 Sep 28 13:51 RELEASE-NOTES
+-rw-r----- 1 root root 16507 Sep 28 13:51 RUNNING.txt
+drwxr-x--- 2 root root  4096 Nov  9 07:11 bin
+drwx------ 2 root root  4096 Sep 28 13:51 conf
+drwxr-x--- 2 root root  4096 Nov  9 07:11 lib
+drwxr-x--- 2 root root  4096 Sep 28 13:51 logs
+drwxr-x--- 2 root root  4096 Nov  9 07:11 temp
+drwxr-x--- 7 root root  4096 Sep 28 13:51 webapps
+drwxr-x--- 2 root root  4096 Sep 28 13:51 work
+
+root@ip-10-10-0-119:~/apache-tomcat-9.0.54# cd bin
+root@ip-10-10-0-119:~/apache-tomcat-9.0.54/bin# ls -l
+total 880
+-rw-r----- 1 root root  34754 Sep 28 13:51 bootstrap.jar
+-rw-r----- 1 root root   1664 Sep 28 13:51 catalina-tasks.xml
+-rw-r----- 1 root root  16840 Sep 28 13:51 catalina.bat
+-rwxr-x--- 1 root root  25294 Sep 28 13:51 catalina.sh
+-rw-r----- 1 root root   2123 Sep 28 13:51 ciphers.bat
+-rwxr-x--- 1 root root   1997 Sep 28 13:51 ciphers.sh
+-rw-r----- 1 root root 207420 Sep 28 13:51 commons-daemon-native.tar.gz
+-rw-r----- 1 root root  25357 Sep 28 13:51 commons-daemon.jar
+-rw-r----- 1 root root   2040 Sep 28 13:51 configtest.bat
+-rwxr-x--- 1 root root   1922 Sep 28 13:51 configtest.sh
+-rwxr-x--- 1 root root   9100 Sep 28 13:51 daemon.sh
+-rw-r----- 1 root root   2091 Sep 28 13:51 digest.bat
+-rwxr-x--- 1 root root   1965 Sep 28 13:51 digest.sh
+-rw-r----- 1 root root   3606 Sep 28 13:51 makebase.bat
+-rwxr-x--- 1 root root   3382 Sep 28 13:51 makebase.sh
+-rw-r----- 1 root root   3460 Sep 28 13:51 setclasspath.bat
+-rwxr-x--- 1 root root   3708 Sep 28 13:51 setclasspath.sh
+-rw-r----- 1 root root   2020 Sep 28 13:51 shutdown.bat
+-rwxr-x--- 1 root root   1902 Sep 28 13:51 shutdown.sh
+-rw-r----- 1 root root   2022 Sep 28 13:51 startup.bat
+-rwxr-x--- 1 root root   1904 Sep 28 13:51 startup.sh
+-rw-r----- 1 root root  46607 Sep 28 13:51 tomcat-juli.jar
+-rw-r----- 1 root root 428057 Sep 28 13:51 tomcat-native.tar.gz
+-rw-r----- 1 root root   4574 Sep 28 13:51 tool-wrapper.bat
+-rwxr-x--- 1 root root   5540 Sep 28 13:51 tool-wrapper.sh
+-rw-r----- 1 root root   2026 Sep 28 13:51 version.bat
+-rwxr-x--- 1 root root   1908 Sep 28 13:51 version.sh
+
+root@ip-10-10-0-119:~/apache-tomcat-9.0.54/bin# cd -
+/root/apache-tomcat-9.0.54
+root@ip-10-10-0-119:~/apache-tomcat-9.0.54# cd conf
+root@ip-10-10-0-119:~/apache-tomcat-9.0.54/conf# ls -l
+total 232
+-rw------- 1 root root  13052 Sep 28 13:51 catalina.policy
+-rw------- 1 root root   7276 Sep 28 13:51 catalina.properties
+-rw------- 1 root root   1400 Sep 28 13:51 context.xml
+-rw------- 1 root root   1149 Sep 28 13:51 jaspic-providers.xml
+-rw------- 1 root root   2313 Sep 28 13:51 jaspic-providers.xsd
+-rw------- 1 root root   4144 Sep 28 13:51 logging.properties
+-rw------- 1 root root   7589 Sep 28 13:51 server.xml
+-rw------- 1 root root   2756 Sep 28 13:51 tomcat-users.xml
+-rw------- 1 root root   2558 Sep 28 13:51 tomcat-users.xsd
+-rw------- 1 root root 172359 Sep 28 13:51 web.xml
+
+root@ip-10-10-0-119:~/apache-tomcat-9.0.54/conf# vi server.xml
+
+tomcat default port is 8080 and changed to 8090 and add to aws server security group inbound rules
+
+<Connector port="8090" protocol="HTTP/1.1"
+
+root@ip-10-10-0-119:~/apache-tomcat-9.0.54/conf# vi tomcat-users.xml
+
+and very botton add the script
+
+-->
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <role rolename="manager-jmx"/>
+  <role rolename="manager-status"/>
+  <user username="tomcat" password="tomcat" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+</tomcat-users>
+
+root@ip-10-10-0-119:/opt/tomcat/webapps/host-manager/META-INF# vi context.xml
+
+<!-- <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+
+root@ip-10-10-0-119:/opt/tomcat/webapps/manager/META-INF# vi context.xml
+
+<!-- <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+
+root@ip-10-10-0-119:/opt/tomcat/bin# ./startup.sh
+
+Using CATALINA_BASE:   /opt/tomcat
+Using CATALINA_HOME:   /opt/tomcat
+Using CATALINA_TMPDIR: /opt/tomcat/temp
+Using JRE_HOME:        /usr
+Using CLASSPATH:       /opt/tomcat/bin/bootstrap.jar:/opt/tomcat/bin/tomcat-juli.jar
+Using CATALINA_OPTS:
+Tomcat started.
+
+username : tomcat
+password : tomcat
+
+Tomcat Web Application Manager
+
+root
+docs 
+examples
+host-manager
+manager
+
+copy the war file from tomcat webapps folder and refresh the tomcat webserver and shows the war
+and operate war web application file like start and stop the web application server
