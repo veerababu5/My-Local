@@ -1,0 +1,172 @@
+yum install docker -y       installing docker command
+
+which docker 		    searching the location of the docker file
+
+service docker status       status of the docker application like (active or inactive)
+
+service docker start        start the docker applicaton
+
+service docker stop         stop the docker application
+
+docker --version            check the version of the docker application
+
+docker info                 total inforamation of the docker application
+
+docker images               both commands are use to seen the docker images
+docker image ls			
+
+docker ps                   seen the running containers
+
+docker ps -a                seen the all containers like (running or stoped)
+
+docker run -it ubuntu /bin/bash      create the container of using ubuntu image and create the ubuntu image latest
+i means interactive (we can write to see it)
+t means terminal    (we can create any number of terminals)
+/ first /means top level of root directory
+bash is like a shell now a days using bash shell
+baground black colour terminal is called as shell
+
+hub.docker.com              download the images from docker hub (google it)
+
+cat /etc/os-release         see the details of the os(operating system)
+
+exit                        exit the container and stop the container
+
+docker search ubuntu        see the total information of ubuntu image not a ubuntu image if you create a own image and then search it the total information you see it
+
+docker run -it chef/chefdk /bin/bash    create a chef/chefdk container and chef/chefdk image
+
+chef -v                     see the version of chef this command is used to only chef container
+
+dcker pull jenkins/jenkins  create a jenkins/jenkkins image(only image not a container)
+
+CONTAINER ID   IMAGE         COMMAND       CREATED        STATUS                      PORTS     NAM
+f90041697122   chef/chefdk   "/bin/bash"   19 hours ago   Exited (0) 18 hours ago             veerababu
+
+docker rename oldNAME(ex:veerababu) newNAME(ex:siva)    the container name is changed to veerabau to siva
+
+CONTAINER ID   IMAGE         COMMAND       CREATED        STATUS                      PORTS     NAM
+f90041697122   chef/chefdk   "/bin/bash"   19 hours ago   Exited (0) 18 hours ago              siva
+
+docker run -it --name veeru ubuntu /bin/bash         create the default name like veeru container is created under ubuntu image(create only container not an image if not create the image at a time create both like container and image)
+
+docker start veeru(container name/container id)       this command is used to start the container
+
+docker attach veeru(container name/container id)      this command is used to attach the veeru container
+
+docker rm veeru(container name/container id)          this command is used to delete the container (rm=remove)
+
+chkconfig docker on                      always docker services on (for ex:stop and start the instances and check docker status is always active)
+
+chkconfig docker off                     always docker service off (for ex: docker service is running then stop and start the instance check the service status of the docker is inactive)
+
+red hat family os - amazon	
+                  - rhel                 if you install any software 
+                  - cent os              (yum command is use)
+                  - fedora
+debian family os  -ubuntu         this is very famous os using(apt-get command is use)
+
+docker commit veerababu(container name) chinnaimage(create image)        create new image under veerababu container
+
+docker run -it --name bobbycont chinnaimage /bin/bash       create a bobby container under chinna image
+
+vi Dockerfile
+FROM ubuntu
+RUN echo "hi veerababu" > /tmp/testfile
+RUN apt-get update -y
+RUN apt-get install tree -y
+:wq
+
+docker build -t test .             build the information of test image 
+
+docker run -it --name bobbycont test /bin/bash       create the test image 
+ls /tmp/testfile
+hi veerababu
+
+vi Dockerfile
+FROM ubuntu
+WORKDIR /tmp
+RUN echo "hi veerababu" /tmp/testfile
+ENV myname veerababu
+COPY testfile1 /tmp
+ADD test.tar.gz /tmp
+:wq
+
+touch tetfile1 test        create a testfile1 and test  files are creates
+
+ls 
+Dockerfile test testfile1         three files are showed
+
+tar -cvzf test.tar.gz test
+ c- create
+ v- verbals
+ z- zip
+ f- force
+
+ls 
+Dockerfile test testfile1 test.tar.gz(show the red colour)   
+
+rm -rf test                        delete the test file
+
+docker build -t demo .           build the information on demo image
+
+docker run -it --name democont demo /bin/bash    create the demo container under demo image
+
+cat testfile
+hi veerababu
+
+echo $myname
+veerababu
+
+vi Dockerfile
+FROM ubuntu
+VOLUME ["/data"]
+:wq
+
+docker build -t myimg .       buils the information on myimg
+
+docker run -it --name mycont1 myimg /bin/bash        create a mycont1 in myimg
+ls
+data folder is showed
+touch myfile            myfile is created in data folder
+
+docker run -it --name mycont2 --privileged=true --volumes-from mycont1 ubuntu /bin/bash         create the new container (mycont2) mycont1 data is show the mycont2(cont to cont)
+
+docker run -it --name mycont3 -v prav ubuntu /bin/bash    create the mycont3 and prav folder is created under mycont3
+
+docker run -it --name mycont4 --privileged=true --volumes-from mycont3 ubuntu /bin/bash        create the volumes from mycont3
+
+docker run -it --name veerudemy -v /home/ec2-user:/babuu ubuntu /bin/bash     copy the files from home path veerudemy container under prav folder like (Dockerfile , testfile1 ,test.tar.gz)
+
+docker inspect veerudemy(container name)                   to see the total information of veerudemy container
+
+docker run -td --name webserver -p 80:80 ubuntu            create the webserver container and the port 80:80
+
+docker means application
+run means create a container
+-t means terminal
+-d dettach
+webserver menas container name
+-p means portnumber 80:80 first 80 is host ip it will change and second 80 is container ip it will not be change 
+ubuntu is a image
+
+docker exec -it webserver /bin/bash
+
+apt-get update -y
+apt-get install apache2 -y
+
+cd /var/www/html
+
+echo "hi docker this is veerababu" > index.html
+echo "hi docker this is praveen" > babu.html
+
+ls 
+index.html   babu.html   files are seen
+
+service apache2 start       the apache2 service will be started
+
+take the public ip and put it down to web search bar
+3.110.187.243
+Hi docker this is veerababu
+3.110.187.243/babu.html
+hi docker this is praveen
