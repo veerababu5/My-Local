@@ -1,1 +1,29 @@
-#Ansible installation
+# Ansible installation
+
+1. Launch two servers(ubuntu) using aws
+=> ansible controller
+=> ansible remote
+
+login to ansible controller server and create a ansadmin user provide sudo permissions generate ssh-keygen and copy into remote server
+
+sudo su -
+
+adduser ansadmin
+
+visudo
+ansadmin    ALL=(ALL:ALL)   NOPASSWD: ALL
+
+su ansadmin
+
+ssh-keygen
+
+ls -la
+.ssh    directory created
+
+cd .ssh
+
+ls -la
+id_rsa
+id_rsa.pub
+
+# login into the remote server
