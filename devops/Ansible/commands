@@ -27,3 +27,100 @@ id_rsa
 id_rsa.pub
 
 # login into the remote server
+
+sudo su -
+
+adduser ansadmin
+
+visudo
+ansadmin    ALL=(ALL:ALL)   NOPASSWD: ALL
+
+vi /etc/ssh/sshd_config
+pub key authentication yes
+password authentication yes
+
+systemctl restart sshd.service
+
+go to the ansible controller server
+
+ssh-copy-id (ansible remote server ip)
+passwd:
+
+ssh (ansible remote server ip)      connect to the remote server ip
+
+install ansible in ansible controller server
+
+sudo apt update -y
+
+sudo apt upgrade -y
+
+sudo apt-add-repository ppa:ansible/ansible
+
+sudo apt-get install ansible -y
+
+sudo ansible --version
+
+vi /etc/anisble/hosts
+[devserver]
+add ansible remote server ip
+
+ansible -m ping all
+
+ansible -m ping devserver
+
+touch ansible-file        create a ansible file in controller server
+
+ansible -m copy -a "src=/home/ansadmin/ansible-file dest=/home/ansadmin" devserver -i host
+
+the ansible-file is copy to controller server to remote server
+
+ansible -m apt -a "name=tree state=present" devserver -i host -b
+
+install the tree in remote server using controller server using ansible
+
+ansible -m user -a "name=veerababu state=present" devserver -i host -b
+
+create the veerababu user in remote server using controller server 
+
+## sample playbooks
+
+vi playbook.yml
+---
+- hosts : devserver
+  become : true
+  
+  tasks :
+  - name : install tree
+    apt : 
+    name : tree
+    state : present
+    
+ansible-playbook playbook.yml --syntax-check -i host             checking the syntax check if code is succesful it shows the 
+playbook.yml
+
+ansible-playbook playbook.yml -i host
+
+if state is present install the tree software and if state is absent not install the tree
+
+---
+- hosts : devserver
+  become : true
+  
+  tasks :
+  - name : install tree
+    apt : 
+    name : tree
+    state : present
+    
+  - name : install nginx
+    apt :
+    name : nginx
+    state : present
+    
+ systemctl status nginx
+ 
+ nginx default port is 80 add the security groups inbound rules
+ 
+ 
+
+
