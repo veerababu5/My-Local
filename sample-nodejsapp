@@ -1,0 +1,182 @@
+How to Create Docker Image for Node JS Application
+
+
+Step 1: Creating Node.js Application
+Lets create the directory named nodejsdocker to add node js files to test.
+
+$ sudo mkdir nodejsdocker
+Navigate to nodejsdocker directory
+
+$ cd nodejsdocker
+Create the package.json file where you will specify all dependencies of your Node JS application
+
+$ sudo nano package.json
+paste the below lines into it
+
+{
+  "name": "Docker_NodeJS_App",
+  "version": "0.1",
+  "description": "Node.js Application with Docker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
+Next create the server.js page to test Node JS application with express framework
+
+$ sudo nano server.js
+Paste the below lines in it
+
+'use strict';
+
+const express = require('express');
+
+// Constants
+const PORT = 3000;
+const HOST = '0.0.0.0';
+
+
+const app = express();
+app.get('/', (req, res) => {
+res.send('Testing Node JS Application');
+});
+
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
+Step 2: How to Create Docker Image for Node JS Application
+Before creating Docker Image for Node JS application install the docker using below link if not installed.
+
+How to Install Docker on Ubuntu 19.10/18.04/16.04 LTS
+
+How to Install Docker on Windows 10
+
+For other OS follow Docker Official Guide
+
+Next create the Dockerfile with below command in Project root directory
+
+$ sudo nano Dockerfile
+Paste the below Dockerfile instructions in it
+
+FROM node:12
+
+# To Create nodejsapp directory
+WORKDIR /nodejsapp
+
+# To Install All dependencies
+
+COPY package*.json ./
+
+RUN npm install
+
+# To copy all application packages 
+COPY . .
+
+# Expose port 3000 and Run the server.js file to start node js application
+EXPOSE 3000
+CMD [ "node", "server.js" ]
+Now build the Docker Image using below command
+
+$ sudo docker build -t nodejsdocker .
+Sample Output:
+
+added 50 packages from 37 contributors and audited 50 packages in 6.293s
+found 0 vulnerabilities
+
+Removing intermediate container 3e97b890d792
+---> 6a354a5d9d56
+Step 5/7 : COPY . .
+---> 9f75f8ce0d6f
+Step 6/7 : EXPOSE 3000
+---> Running in 66c4a65f7392
+Removing intermediate container 66c4a65f7392
+---> 9009232a55e9
+Step 7/7 : CMD [ "node", "server.js" ]
+---> Running in 8d4d96bc2877
+Removing intermediate container 8d4d96bc2877
+---> ba86a68c01e4
+Successfully built ba86a68c01e4
+Successfully tagged nodejsdocker:latest
+once build is successful , you can see list of docker images using below command
+
+$ docker images
+Output:
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+nodejsdocker        latest              ba86a68c01e4        5 minute ago        922MB
+<none>              <none>              5c85c5a4da87        5 minute ago        922MB
+<none>              <none>              29fa5eed7d5e        5 minute ago        918MB
+node                12                  e163934eebb0        5 minute ago          918MB
+alpine              latest              a24bb4013296        5 minute ago         5.57MB
+We have covered, How to create Docker Image for Node JS Application.
+
+Run the Docker container , -p is used to map the public port to docker container internal port, Here I am using same port for both.
+
+$ docker run -p 3000:3000 nodejsdocker
+Output:
+
+docker run -p 3000:3000 nodejsdocker
+Running on http://0.0.0.0:3000
+If you want to run Docker container in detached mode use below command
+
+$ docker run -p 3000:3000 -itd CONTAINER_ID
+To check docker Process
+
+$ docker ps
+Output:
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+ac89891c8dfb        nodejsdocker        "docker-entrypoint.s…"   10 minute ago        Up 37 minutes         0.0.0.0:3000->3000/tcp   nostalgic_robinson
+To check Docker Container logs
+
+$ docker logs CONTAINER_ID
+Output:
+
+Running on http://0.0.0.0:3000
+Testing the Docker Container
+Open your favorite browser and type server IP with container public port
+
+$ Server_IP:port
+Output:
+
+run the nodejs docker container
+
+OR
+
+You can test also using curl command
+
+$ curl -i http://localhost:3000
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 27
+ETag: W/"1b-uO/TfUtLPwJy4DS2pakC/kf+9oA"
+Date: Thu, 11 Jun 2020 04:55:34 GMT
+Connection: keep-alive
+
+
+Testing Node JS Application
+To stop Docker container
+
+$ docker stop CONTAINER_ID
+Pushing Docker Image to Docker Hub Repository
+If you want to push the docker image to Docker Hub Registery. First login to https://hub.docker.com  with ID and password using command line
+
+$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: fosstechnix
+Password:
+Login Succeeded
+Now push Docker Image to Docker Hub Repository
+
+$ docker push nodejsdocker
+Error: denied: requested access to the resource is denied:docker
+
+If you are getting above error while pushing docker images to docker hub repository first time then first tag the Docker Image and try to push again
+
+ $ docker tag nodejsdocker fosstechnix/nodejsdocker
+Push the Docker Image again
+
+$ docker push fosstechnix/nodejsdocker
