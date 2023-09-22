@@ -1,4 +1,4 @@
-how to change the docker port in ubuntu machine
+#how to change the docker port in ubuntu machine
 
 vi /etc/default/jenkins
 
@@ -14,3 +14,15 @@ systemctl daemon-reload
 
 systemctl restart jenkins.service                apply this command in  /lib/systemd/system
 
+
+#how to change the docker port in rhel machine
+
+vi /etc/sysconfig/jenkins
+
+change JENKINS_PORT=8080 to 8085
+
+service jenkins restart
+
+netstat -plunt | grep :8085
+
+open the 8085 port in securitygroup inbound rules
