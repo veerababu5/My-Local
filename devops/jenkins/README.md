@@ -21,8 +21,14 @@ vi /etc/sysconfig/jenkins
 
 change JENKINS_PORT=8080 to 8085
 
+and also change the 
+
+vi /usr/lib/systemd/system/jenkins.service
+
+change Environment="JENKINS_PORT=8080" to 8085
+
+systemctl daemon-reload
+
 service jenkins restart
 
 netstat -plunt | grep :8085
-
-open the 8085 port in securitygroup inbound rules
